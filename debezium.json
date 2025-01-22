@@ -9,11 +9,17 @@
     "database.password": "admin",
     "database.dbname": "testdb",
     "database.server.name": "postgres",
-    "table.include.list": "public.student",
+    "table.include.list": "public.customer,public.product",
     "topic.prefix": "testdb",
-    "transforms": "Route",
+    
+    "transforms": "Route,PartitionRouting",
+    
     "transforms.Route.type": "org.apache.kafka.connect.transforms.RegexRouter",
-    "transforms.Route.regex": ".*",
-    "transforms.Route.replacement": "hello-world-topic"
+    "transforms.Route.regex": "testdb.public.(.*)",
+    "transforms.Route.replacement": "testdb.public.$1.topic",
+
+    "transforms.PartitionRouting.type":"io.debezium.transforms.partitions.PartitionRouting",
+    "transforms.PartitionRouting.partition.payload.fields": "change.name",
+    "transforms.PartitionRouting.partition.topic.num": 2
   }
 }
