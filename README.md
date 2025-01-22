@@ -286,6 +286,9 @@ And the partition routing is defined using the name field in the change event.
 "transforms.PartitionRouting.partition.payload.fields": "change.name",
 "transforms.PartitionRouting.partition.topic.num": 2
 ```
+
+We can also use Content based routing. An example of CBR is added in in ```debezium-CBR.json``` file. To configure CBR, we will need to copy the scripting related jar files present in ```debezium-scripting``` folder inside ```/kafka/connect/debezium-connector-postgres``` folder inside our debezium container.
+
 You can read more about message routing here https://debezium.io/documentation/reference/stable/transformations/index.html
   
 

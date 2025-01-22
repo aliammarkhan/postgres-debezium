@@ -1,0 +1,20 @@
+{
+    "name": "testdb-connector",
+    "config": {
+      "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+      "plugin.name": "pgoutput",
+      "database.hostname": "postgres",
+      "database.port": "5432",
+      "database.user": "admin",
+      "database.password": "admin",
+      "database.dbname": "testdb",
+      "database.server.name": "postgres",
+      "table.include.list": "public.customer,public.product",
+      "topic.prefix": "testdb",
+      
+      "transforms": "route",
+      "transforms.route.type" : "io.debezium.transforms.ContentBasedRouter",
+      "transforms.route.language" : "jsr223.groovy",
+      "transforms.route.topic.expression": "value.op == 'u' ? 'updates' : null"
+    }
+}
