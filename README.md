@@ -70,17 +70,7 @@ After the containers are up and running, establish the Debezium connection to ca
   
 
 ```
-
-  
-
-curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" \
-
-  
-
-127.0.0.1:8083/connectors/ --data "@debezium.json"
-
-  
-
+curl -i -X POST -H "Accept:application/json" -H "Content-Type:application/json" 127.0.0.1:8083/connectors/ --data "@debezium.json"
 ```
 This will configure Debezium to listen for changes on the `product` and `customer` table in the Postgres database.
 
@@ -107,13 +97,7 @@ Once the Debezium connector is set up, you can observe changes in the Kafka topi
   
 
 ```
-
-  
-
 docker run --tty --network postgres_debezium_network confluentinc/cp-kafkacat kafkacat -b kafka:9092 -C -s key=s -t <topic_name> -p <partion_number>
-
-  
-
 ```
 
 Replace `<topic_name> ` with the name of the kafka topic defined in `debezium.json` file.
@@ -162,7 +146,7 @@ Use the following commands to interact with the Postgres container:
 
 ``` docker exec -it <container_id> psql -U admin -d testdb -c "UPDATE customer SET AGE = 30 WHERE NAME = 'Jane Doe';" ```
 
-``` docker exec -it 4fefbf9f784b psql -U admin -d testdb -c "DELETE from product where name = 'milk'"``
+``` docker exec -it 4fefbf9f784b psql -U admin -d testdb -c "DELETE from product where name = 'milk'" ```
 
   
 
