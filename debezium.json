@@ -9,7 +9,20 @@
     "database.password": "admin",
     "database.dbname": "testdb",
     "database.server.name": "postgres",
+    "snapshot.mode": "initial",
     "table.include.list": "public.student",
-    "topic.prefix": "testdb"
+    "topic.prefix": "testdb",
+    
+    "transforms": "Route,unwrap,rename",
+    
+    "transforms.Route.type": "org.apache.kafka.connect.transforms.RegexRouter",
+    "transforms.Route.regex": ".*",
+    "transforms.Route.replacement": "hello-world-topic",
+    
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.add.fields": "op,table,lsn,source.ts_ms",
+    
+    "transforms.rename.type": "org.apache.kafka.connect.transforms.ReplaceField$Value",
+    "transforms.rename.renames": "name:first_name,address:current_address"
   }
 }
