@@ -45,7 +45,8 @@ Now, execute SQL insert, update, and delete statements on the `student` table in
 	You can get the postgres `<container_id>`  by running the command `docker ps`. The this will list all the running containers.'
 	
  - **Message Transformation and initial db snapshot.**
-	After establishing the debezium connection, debezium will capture all the changes from that point in time. If we also want to get the current table data, We can use this property in debezium.json file 		```"snapshot.mode": "initial",```.
+	
+ 	After establishing the debezium connection, debezium will capture all the changes from that point in time. If we also want to get the current table data, We can use this property in debezium.json file 		```"snapshot.mode": "initial",```.
 	
 	Also If we want to perform message transformation, like changing the field name or the message structure we can use event flattening transformation.
 	
@@ -54,7 +55,7 @@ Now, execute SQL insert, update, and delete statements on the `student` table in
 	transforms.unwrap.type=io.debezium.transforms.ExtractNewRecordState
 	```
 	
-	To change the field name ```org.apache.kafka.connect.transforms.ReplaceField$Value```  SMT. The following properties will flatten the data, change field name and include metadata fields in the final message 		structure.
+	To change the field name, we can use the ```org.apache.kafka.connect.transforms.ReplaceField$Value``` SMT. The following properties will flatten the data, change field name and include metadata fields in the 	final message structure.
 	
 	```
 	"snapshot.mode": "initial",
